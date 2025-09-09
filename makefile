@@ -21,3 +21,11 @@ down:
 # Ver logs
 logs:
 	docker logs -f streamlit-app
+
+# Deploy para Github e Docker Hub caso não funcione localmente
+# deploy:
+# 	@echo ">> Deploy Github"
+# 	git add . | git commit -m 'Deploy via Makefile' | git push origin main
+# 	@echo ">> Deploy Docker Hub"
+# 	docker tag app-ci-cd:latest lemesvilarinho/app-ci-cd:latest
+# 	docker push lemesvilarinho/app-ci-cd:latest
