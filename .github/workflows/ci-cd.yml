@@ -43,4 +43,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:1.1.0
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:1.2.0

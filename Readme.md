@@ -1,9 +1,9 @@
-# Tutorial CI/CD no Docker Local
+# Tutorial CI/CD
 
 # 🚀 Streamlit + Docker + CI/CD
 
-Este projeto é um exemplo completo de aplicação **Streamlit** containerizada com **Docker** e integrada com **CI/CD no GitHub Actions**.  
-Permite rodar localmente via **Docker Compose**.
+Este projeto é um exemplo completo de aplicação **Streamlit** containerizada com **Docker** e integrada com **CI/CD no GitHub Actions** e com **Docker Hub**.  
+Permitindo rodar localmente via **Docker Compose**.
 
 ---
 
@@ -21,6 +21,7 @@ app_ci_cd/ \
 │ └── workflows/\
 │ └── ci-cd.yml # Pipeline CI/CD do GitHub Actions\
 
+**OBS:** o arquivo ci-cd.yml contém as configurações o Docker hub.
 
 ---
 
@@ -80,8 +81,11 @@ Adicione:
 
 **DOCKERHUB_TOKEN** → Token de acesso do Docker Hub
 
-**SERVER_SSH_KEY** → Chave privada SSH usada para acessar o servidor
+<img src="./docs/config_secrets.png">
 
+Capturando o Token Docker Hub:
+
+<img src="./docs/generate_key.png">
 ---
 
 ## ⚙️ Para rodar o Makefile localmente (Windows)
@@ -110,6 +114,12 @@ Para rodar o arquivo **makefile** localmente no prompt é necessário instalar o
 - Derrubar containers
 
 ```make down```
+
+## ▶️ Rodando o Projeto
+
+Para rodar o projeto basta fazer o **git push** para o Github, a seguir como visualizar o andamento do projeto.
+
+<img src="./docs/actions_git.png">
 
 ## 👨‍💻 Sobre
 
