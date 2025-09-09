@@ -8,11 +8,28 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "1.0.0"
+        description: "Nova compilação da imagem"
         required: false
-        default: "1.1.0"
+        default: "1.0.0"
 
 jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar testes
+        run: pytest --maxfail=1 --disable-warnings -q
+        
   docker-build-and-push:
     runs-on: ubuntu-latest
     steps:
@@ -40,5 +57,4 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:${{ env.IMAGE_TAG }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:1.0.0
