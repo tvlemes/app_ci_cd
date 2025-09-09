@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: ":1.0.0"
+        description: ":1.1.0"
         required: false
         default: "latest"
 
