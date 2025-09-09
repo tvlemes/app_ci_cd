@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  streamlit:
+    image: app_ci_cd:latest
+    build: .
+    container_name: streamlit-app
+    ports:
+      - "8501:8501"
+    restart: always
