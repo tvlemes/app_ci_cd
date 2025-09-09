@@ -45,7 +45,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:latest
  
-
+ 
   deploy:
     needs: docker-build-and-push
     runs-on: ubuntu-latest
