@@ -21,7 +21,7 @@ app_ci_cd/ \
 │ └── workflows/\
 │ └── ci-cd.yml # Pipeline CI/CD do GitHub Actions\
 
-**OBS:** o arquivo ci-cd.yml contém as configurações o Docker hub.
+**OBS:** o arquivo **ci-cd.yml** contém as configurações o Docker Hub. Neste mesmo arquivo é necessário alterar a versão da imagem docker em: ```tags: ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:<versão_imagem>``` para não sobrescrever a imagem antiga.
 
 ---
 
