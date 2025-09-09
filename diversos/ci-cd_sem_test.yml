@@ -6,27 +6,14 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Nova compilação da imagem"
+        required: false
+        default: "1.0.0"
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Instalar dependências
-        run: pip install -r requirements.txt
-
-      - name: Rodar testes
-        run: pytest --maxfail=1 --disable-warnings -q
-
   docker-build-and-push:
-    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout código
@@ -38,9 +25,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Definir versão da imagem
+        id: vars
+        run: |
+          if [ -n "${{ github.event.inputs.tag }}" ]; then
+            echo "IMAGE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=build-${{ github.run_number }}" >> $GITHUB_ENV
+          fi
+
       - name: Build e Push da imagem Docker
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/app_ci_cd:1.0.0
